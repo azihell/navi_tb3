@@ -34,7 +34,7 @@ class FindTags:
     self.pose = data.pose
     if (self.pose.position.x != 0 and self.pose.position.y != 0 and self.pose.position.z != 0):
       rospy.loginfo_once("Tag 0 encontrada. Dirigindo-se a outro local")
-      self.move_base(1, 1, 0, 1)
+      # self.move_base(1, 1, 0, 1)
       tag1sub = rospy.Subscriber("/tag_1/stag_ros/markers", PoseStamped, callback=self.callback1, queue_size=10)
 
   def callback1(self, data):

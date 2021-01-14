@@ -1,0 +1,25 @@
+<launch>
+    <!--Start Stag Node-->
+    <node ns="tag_0" name="stag_node_tag_0" pkg="stag_ros" type="stag_node" output="screen" required="true">
+        <!-- Place the correct yaml settings file here-->
+        <rosparam command="load" file="$(find stag_ros)/cfg/turtle_settings.yaml"/>
+        
+        <!-- Place the correct tag identifier file here-->
+        <rosparam command="load" file="$(find stag_ros)/cfg/tag_0.yaml"/>
+    </node>
+    <node ns="tag_1" name="stag_node_tag_1" pkg="stag_ros" type="stag_node" output="screen" required="true">
+        <!-- Place the correct yaml settings file here-->
+        <rosparam command="load" file="$(find stag_ros)/cfg/turtle_settings.yaml"/>
+        
+        <!-- Place the correct tag identifier file here-->
+        <rosparam command="load" file="$(find stag_ros)/cfg/tag_1.yaml"/>
+    </node>
+    <node ns="tag_2" name="stag_node_tag_2" pkg="stag_ros" type="stag_node" output="screen" required="true">
+        <!-- Place the correct yaml settings file here-->
+        <rosparam command="load" file="$(find stag_ros)/cfg/turtle_settings.yaml"/>
+        
+        <!-- Place the correct tag identifier file here-->
+        <rosparam command="load" file="$(find stag_ros)/cfg/tag_2.yaml"/>
+
+    </node>
+</launch>

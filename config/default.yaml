@@ -1,0 +1,24 @@
+debug: true
+pose_topic: pose
+enable_tf: true
+robot_as_parent: true
+camera_tf_name: camera_rgb_optical_frame
+map_tf_name: map
+base_tf_name: base_link
+camera_matrix: [251.93628, 0.0, 159.90146, 0.0, 252.37289, 119.1224, 0.0, 0.0, 1.0]
+camera_distortion: [0.170253, -0.293410, 0.001092, -0.000482, 0.000000]
+image_topic: /raspicam/image
+markers_dictionary: 1
+markers_length: [55] # length in mm.
+markers_55: [13] # Markers id with length 0.
+markers_sufix: id_
+static_camera_transform: true
+static_marker: true
+static_markers_id: [13]
+static_variance: false
+variance_matrix: [0.01, 0, 0, 0, 0, 0, 
+                  0, 0.01, 0, 0, 0, 0,
+                  0, 0, 0.01, 0, 0, 0,
+                  0, 0, 0, 0.01, 0, 0,
+                  0, 0, 0, 0, 0.01, 0,
+                  0, 0, 0, 0, 0, 0.01]

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="enable/publish_image" default="true"/>
+    <arg name="enable/publish_markers" default="true"/>
+    <arg name="enable/tf" default="true"/>
+    <arg name="markers/prefix" default="id_"/>
+    <arg name="markers/dictionary" default="1"/>
+    <arg name="markers/lengths" default="[55]"/>
+    <arg name="camera/tf_name" default="camera_rgb_optical_frame"/>
+    <arg name="camera/matrix" default="[251.93628, 0.0, 159.90146, 0.0, 252.37289, 119.1224, 0.0, 0.0, 1.0]" />
+    <arg name="camera/distortion" default="[0.170253, -0.293410, 0.001092, -0.000482, 0.000000]" />
+    <arg name="markers_param_file" default="$(find navi)/config/markers_config.yaml" />
+
+    <node pkg="marker_localization" type="free_markers_localization" name="free_markers_localization" output="screen">
+        <param name="enable/publish_image" value="$(arg enable/publish_image)"/>
+        <param name="enable/publish_markers" value="$(arg enable/publish_markers)"/>
+        <param name="enable/tf" value="$(arg enable/tf)"/>
+        <param name="camera/tf_name" value="$(arg camera/tf_name)"/>
+        <param name="markers/prefix" value="$(arg markers/prefix)"/>
+        <param name="markers/dictionary" value="$(arg markers/dictionary)"/>
+        
+        <rosparam param="markers/lengths" subst_value="true">$(arg markers/lengths)</rosparam>
+        <rosparam param="camera/matrix" subst_value="true">$(arg camera/matrix)</rosparam>
+        <rosparam param="camera/distortion" subst_value="true">$(arg camera/distortion)</rosparam>
+
+        <rosparam command="load" file="$(arg markers_param_file)"></rosparam>
+
+        <remap from="/camera/image_raw" to="/raspicam/image"/>
+        <remap from="detected_markers/image" to="detected_markers/image"/>
+        <remap from="detected_markers/pose" to="/detected_markers/output"/>
+    </node>
+</launch>
