@@ -8,8 +8,16 @@
     <arg name="markers/dictionary" default="1"/>
     <arg name="markers/lengths" default="[55]"/>
     <arg name="camera/tf_name" default="camera_rgb_optical_frame"/>
-    <arg name="camera/matrix" default="[251.93628, 0.0, 159.90146, 0.0, 252.37289, 119.1224, 0.0, 0.0, 1.0]" />
-    <arg name="camera/distortion" default="[0.170253, -0.293410, 0.001092, -0.000482, 0.000000]" />
+    
+    <!-- Camera matrix for resolution 320x240: -->
+    <!-- <arg name="camera/matrix" default="[251.93628, 0.0, 159.90146, 0.0, 252.37289, 119.1224, 0.0, 0.0, 1.0]"/> -->
+    <!-- Camera distortion matrix for resolution 320x240 -->
+    <!-- <arg name="camera/distortion" default="[0.170253, -0.293410, 0.001092, -0.000482, 0.000000]"/> -->
+
+    <!-- Camera matrix for resolution 480x320 -->
+    <arg name="camera/matrix" default="[452.36405, 0, 239.80478, 0, 452.76271, 158.14871, 0, 0, 1]"/>
+    <!-- Camera distortion for resolution 480x320 -->
+    <arg name="camera/distortion" default="[0.182937, -0.336056, -0.001507, -0.000936, 0.000000]"/>
     <arg name="markers_param_file" default="$(find navi)/config/markers_config.yaml" />
 
     <node pkg="marker_localization" type="free_markers_localization" name="free_markers_localization" output="screen">
