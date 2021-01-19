@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot name="tags_14" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <link name="tag_14"/>
+
+  <link name="near_14"/>
+  <joint name="tag14_joint_to_near_14" type="fixed">
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <parent link="tag_14"/>
+    <child link="near_14"/>
+  </joint>
+
+</robot>
