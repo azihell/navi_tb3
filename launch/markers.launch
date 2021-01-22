@@ -6,7 +6,7 @@
     <arg name="enable/tf" default="true"/>
     <arg name="markers/prefix" default="tag_"/>
     <arg name="markers/dictionary" default="1"/>
-    <arg name="markers/lengths" default="[55]"/>
+    <arg name="markers/lengths" default="[134]"/>
     <arg name="camera/tf_name" default="camera_rgb_optical_frame"/>
     
     <!-- Camera matrix for resolution 320x240: -->
