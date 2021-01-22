@@ -2,19 +2,16 @@
 <launch>
 
   <!-- These are the arguments you can pass this launch file, for example paused:=true -->
-  <group ns="/tags_13">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find navi)/urdf/tag_13.urdf.xacro'"/>
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-  </node>
+  <group ns="/pub_13">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find navi)/urdf/tag_13.urdf.xacro'"/>
+    <node name="tag_13_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
   </group>
-  <group ns="/tags_14">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find navi)/urdf/tag_14.urdf.xacro'"/>
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-  </node>
+  <group ns="/pub_14">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find navi)/urdf/tag_14.urdf.xacro'"/>
+    <node name="tag_14_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
   </group>
-  <group ns="/tags_15">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find navi)/urdf/tag_15.urdf.xacro'"/>
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-  </node>
+  <group ns="/pub_15">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find navi)/urdf/tag_15.urdf.xacro'"/>
+    <node name="tag_15_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
   </group>
 </launch>

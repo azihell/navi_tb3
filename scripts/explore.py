@@ -15,8 +15,7 @@ class Robot:
     self.listener = tf.TransformListener()
     self.tag_ids = [13, 14, 15]
     title = "Tag hunt began. Looking for tags %s"%(self.tag_ids)
-    rospy.loginfo_once(title)
-    
+    rospy.loginfo_once(title) 
     # Rate for publishing prints, specifically
     rospy.Rate(1)
     self.pursuit = None
@@ -31,9 +30,7 @@ class Robot:
     self.find_tag = False
     self.case = 0
     self.goal_move_base(pos_x = 0, pos_y = 0)
-
     rospy.spin()
-
 
   # This method selects the very first tag to be approached, based on sight
   def getTagInfo(self, data):
@@ -60,28 +57,38 @@ class Robot:
   
   def tagPursuit(self):
     
-    print("Chasing tag id", self.tag_id)
-    print("Coords:", self.pos_x, self.pos_y, self.pos_z)
+    print("Found tag id", self.tag_id)
+    print("It's coords are:", self.pos_x, self.pos_y, self.pos_z)
     print("Actual status:", self.mb_status)
     
+    # If a tag gets detected
     if not self.find_tag:
+      # Tag detected flag ON
       self.find_tag = True
-      
+      # Explore-lite gets killed
       # if self.explore_active:
       #   os.system("rosnode kill /explore")
       #   self.explore_active = False
       #   self.pub_mb_goal.publish()
-    
+      
+      # A case for ONE TIME: when the first tag is found
       if self.case == 0:
+        # The transform from the tag found to the base_link. It will be fed to the goal_move_base
         trans, rot = self.listener.lookupTransform('/base_link', '/near'+'_'+str(self.tag_id), rospy.Time(0))
-        import pdb; pdb.set_trace()
+        print("Pursuited tag is at", trans)
         self.goal_move_base(pos_x = trans[0], pos_y = trans[1])
-        self.case = 1
+        # Case 0 won't happen EVER AGAIN!
+        self.case = 1 
+      # For every other self.case value:
       else:
+        # Tag ID number will be used in place of the virtual TFs
         self.tag_id = self.tag_id + 1 if self.tag_id < 15 else 13
-        trans, rot = self.listener.lookupTransform('/base_link', '/near'+'_'+str(self.tag_id), rospy.Time(0))
-        self.goal_move_base(pos_x = trans[0], pos_y = trans[1])
+        print("Approaching tag", self.tag_id)
         
+        trans, rot = self.listener.lookupTransform('/base_link', '/goal_tag'+'_'+str(self.tag_id), rospy.Time(0))
+        self.goal_move_base(pos_x = trans[0], pos_y = trans[1])
+    
+    # Definir condição de aproximação
     if self.mb_status != 1:
       self.pub_mb_goal.publish()
       self.find_tag = False
