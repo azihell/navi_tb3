@@ -1,13 +1,33 @@
 <?xml version="1.0"?>
-<robot name="tags_13" xmlns:xacro="http://ros.org/wiki/xacro">
 
+<robot name="tag_13_settings" xmlns:xacro="http://ros.org/wiki/xacro">
+<!-- Measured distances between tags -->
+<xacro:property name="dx" value="1.53" />
+<xacro:property name="dy" value="0" />
+<xacro:property name="dz" value="0.05" />
+
+  <!-- Below goes the description of either a link that is close to the tag_13, which will be named "near_13"
+  or the description of a link that is close to another tag, which will be used to send the robot elsewhere -->
+
+  <!-- The link which the will be seen by the marker localizator -->
   <link name="tag_13"/>
+
+  <!-- A link for a 'near tag' pose setting purpose: -->
 
   <link name="near_13"/>
   <joint name="tag13_joint_to_near_13" type="fixed">
     <origin xyz="0 0 0.3" rpy="0 0 0"/>
-    <parent link="tag_13"/>
+    <parent link="tag_13"/>tags_13
     <child link="near_13"/>
+  </joint>
+
+  <!-- A link to send the robot close to another tag -->
+  <link name="goal_tag_14"/>
+  <joint name="forward_to_tag_14" type="fixed">
+  <!-- The origin must have the coordinates to a point near tag 14. This must be measured and entered beforehand -->
+    <origin xyz="${dx} ${dy} ${dz}" rpy="0 0 0"/>
+    <parent link="tag_13"/>
+    <child link="goal_tag_14"/>
   </joint>
 
 </robot>
