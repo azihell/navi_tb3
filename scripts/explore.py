@@ -78,10 +78,10 @@ class Robot:
         self.time = rospy.Time.now()
         self.reset_time = False
       # Explore-lite gets killed
-      # if self.explore_active:
-      #   os.system("rosnode kill /explore")
-      #   self.explore_active = False
-      #   self.pub_mb_goal.publish()
+      if self.explore_active:
+        os.system("rosnode kill /explore")
+        self.explore_active = False
+        self.pub_mb_goal.publish()
       
       # A case for ONE TIME: when the first tag is found
       if self.case == 0 and ((rospy.Time.now() - self.time).to_sec() >= 5):
@@ -91,7 +91,7 @@ class Robot:
         ctrans, crot = self.listener.lookupTransform('/camera_rgb_optical_frame', '/tag'+'_'+str(self.tag_id), rospy.Time(0))
         self.goal_move_base(pos_x = trans[0], pos_y = trans[1], ori_z=crot[2])
         # To correct the orientation, the move_base command must be related to the base_link, but the desired orientation comes from the tf relation between the camera_optical_frame and the tag.
-        print("Pursuited tag is approximately", "{:.3f}".format(trans[0]), "meters ahead")
+        # print("Pursuited tag is approximately", "{:.3f}".format(trans[0]), "meters ahead")
         # self.goal_move_base(ori_z=crot[2])
         
         # Case 0 won't happen EVER AGAIN!
